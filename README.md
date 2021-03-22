@@ -4,7 +4,7 @@ Computational Logistics of the Vehicle Routing Problem with Time Windows (VRPTW)
 Conference Proceedings: https://ieeexplore.ieee.org/document/9004294
 
 ## SOLUTION TECHNIQUE ALGORITHMS
-The solution technique algorithms are based and ccording to the respective references given below. The algorithms are coded using Python 3.
+The solution technique algorithms are based according to the respective references given below. The algorithms are coded using Python 3.
 
 ### Genetic Algorithm for the VRPTW:
 Ombuki, Beatrice, Brian J. Ross, and Franklin Hanshar. "Multi-objective genetic algorithms for vehicle routing problem with time windows." Applied Intelligence 24.1 (2006): 17-30.
