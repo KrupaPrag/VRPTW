@@ -20,4 +20,6 @@ For each of the algorithms and the respective metrics, the code for the initial 
 Initial Encoding: '/initial_encoding/main_initialEncoding.py'
 Optimisation: '/main/main.py'
 
+NOTE: Initial encoding needs to be run before running the main file in order to create the initial candidate solutions.
+
 Please note that the '/main/final' folder contains some experiments from solving the VRPTW for datasets with 25 customers. This folder would need to be replicated to run the datasets with 50 and 100 customers.  
