@@ -20,13 +20,13 @@ https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/
 #### Executing Files:
 For each of the algorithms and the respective metrics ('../VRPTW_code/algorithm_Metric'), the code for the initial encoding and optimisation technique can be found in the following files:
 
-*For GA:* 
+##### For GA: 
 
 Initial Encoding: '../initial_encoding/main_initialEncoding.py'
 
 Optimisation: '../main/main.py'
 
-*For PSO:* 
+##### For PSO: 
 
 Initial Encoding: '../initial_encoding/initialEncoding_case1.py'
 
