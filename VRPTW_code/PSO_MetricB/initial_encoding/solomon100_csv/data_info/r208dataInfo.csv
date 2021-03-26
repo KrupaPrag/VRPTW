@@ -1,0 +1,2 @@
+fleet_size,fleet_capacity,fleet_start_x_coord,fleet_start_y_coord,fleet_max_working_time
+25.0,1000.0,35.0,35.0,1000.0

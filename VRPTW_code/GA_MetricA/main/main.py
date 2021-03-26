@@ -47,8 +47,9 @@ final_path = cwd + '/final'
 customer_path  = cwd +'/solomon%d_csv/customers'%(num_customers)
 dataInfo_path = cwd +'/solomon%d_csv/data_info'%(num_customers)
 distanceMatrix_path = cwd +'/solomon%d_csv/distance_matrix'%(num_customers)
-initial_path = cwd + '/initial'
-
+initial_path = cwd.split('/')
+initial_path = '/'.join(initial_path[:-1])
+initial_path = initial_path + '/initial_encoding/initial'
 #%%
 #FILES
 dataset_list = []
@@ -165,8 +166,8 @@ for i in range(len(dataset_list)):
         initial_pop_distance_output_file = os.path.join(initial_path + '/%s/experiment%d' %(dataSet,experiment), '%sinitialDistance.npy'%(dataSet))
         initial_result_output_file = os.path.join(initial_path + '/%s/experiment%d' %(dataSet,experiment), '%sinitialResults.csv'%(dataSet))
 
-        pop_chromosome_routeList_array = np.load(initial_pop_output_file)
-        pop_chromosome_distanceList_array= np.load(initial_pop_distance_output_file)
+        pop_chromosome_routeList_array = np.load(initial_pop_output_file, allow_pickle=True)
+        pop_chromosome_distanceList_array= np.load(initial_pop_distance_output_file, allow_pickle=True)
         df_pop_results = pd.read_csv(initial_result_output_file)
         arr_pop_results = np.asarray(df_pop_results)
         

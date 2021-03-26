@@ -12,19 +12,20 @@ from functions import omega, pbest_particle_pC_list, PSO, CLPSO_velocity_update,
 
 #%%
 num_customers = 25
-num_experiments = 30
+num_experiments = 4
 #%%
 #Paths
 cwd = os.getcwd()
 initial_path = cwd +'/initial'
-final_path = cwd + '/finalFull'#finalResults_path
+final_path = cwd + '/final'#finalResults_path
 
 customer_path  = cwd +'/solomon%d_csv/customers'%(num_customers)
 dataInfo_path = cwd +'/solomon%d_csv/data_info'%(num_customers)
 distanceMatrix_path = cwd +'/solomon%d_csv/distance_matrix'%(num_customers)
-initial_path = cwd + '/initial'
-initialPop_path = cwd +'/initial/initial_pop'
-initialFitness_path = cwd +'/initial/initial_fitness'
+initial_path = cwd.split('/')
+initial_path = '/'.join(initial_path[:-1])
+initialPop_path = initial_path +'/initial_encoding/initial/initial_pop'
+initialFitness_path = initial_path +'/initial_encoding/initial/initial_fitness'
 #%%
 #FILES
 dataset_list = []
@@ -770,10 +771,10 @@ for  i in range(len(dataset_list)):
         #READ IN INITIAL DICTIONARIES
         #dictionary form of initial population
         #READ IN INITIAL DICTIONARIES
-        pop_particle_routeList_list =np.load(initialRouteList_file)
-        pop_particle_distance_list = np.load(initialDistList_file)
-        pop_particle_position_list =  np.array(list(np.load(initialPositionList_files)))
-        pop_particle_velocity_list =  np.array(list(np.load(initialVelocityList_files)))
+        pop_particle_routeList_list =np.load(initialRouteList_file, allow_pickle=True)
+        pop_particle_distance_list = np.load(initialDistList_file, allow_pickle=True)
+        pop_particle_position_list =  np.array(list(np.load(initialPositionList_files, allow_pickle=True)))
+        pop_particle_velocity_list =  np.array(list(np.load(initialVelocityList_files, allow_pickle=True)))
         df_results = pd.read_csv(results_file)
         arr_results = df_results.values# ['num_vehicles', 'distance', 'fitness']
         pop_distance_list = arr_results[:,1]

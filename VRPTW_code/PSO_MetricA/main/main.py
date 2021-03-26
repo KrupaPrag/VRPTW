@@ -1,17 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jun  6 21:57:04 2019
+VRPTW: PSO Metric A 
 
-@author: user
-"""
+@author: krupa prag 
 
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jul 13 01:01:27 2018
-
-@author: krupa
 """
 
 
@@ -22,10 +15,34 @@ import os
 import time
 import multiprocessing
 from functions import omega, pbest_particle_pC_list, PSO, CLPSO_velocity_update, update_route_position, PSO_result_updater, CLPSO_result_updater, local_search_result_updater, global_result_from_experiments, local_search
+#%%
+# Global variables (change for different number of customers)
+num_customers = 25
+num_experiments = 4
 
 #%%
-num_customers = 25
-num_experiments = 30
+#GLOBAL VARIABLES:
+#VARIABLES STIPULATED IN PAPER
+
+M = 20#population size 
+sg = 1000# stopping gap (number of iterations that gbest must not change)
+rg = 7 #refreshing gap
+c = 2#constant c
+phi = 0.3#phi
+w0 = 0.9 #omega #decreases linearly through training to 0.4
+w1 = 0.4
+
+
+
+alpha = 100
+beta = 0.001
+#see parameter calculations for omega and learning probability functions
+
+#Assummed variables:
+max_gen = sg#equal to sg .... so omega changes respective to the new cycle with a max_gen threshold
+
+
+
 #%%
 #Paths
 cwd = os.getcwd()
@@ -35,9 +52,10 @@ final_path = cwd + '/final'#finalResults_path
 customer_path  = cwd +'/solomon%d_csv/customers'%(num_customers)
 dataInfo_path = cwd +'/solomon%d_csv/data_info'%(num_customers)
 distanceMatrix_path = cwd +'/solomon%d_csv/distance_matrix'%(num_customers)
-initial_path = cwd + '/initial'
-initialPop_path = cwd +'/initial/initial_pop'
-initialFitness_path = cwd +'/initial/initial_fitness'
+initial_path = cwd.split('/')
+initial_path = '/'.join(initial_path[:-1])
+initialPop_path = initial_path +'/initial_encoding/initial/initial_pop'
+initialFitness_path = initial_path +'/initial_encoding/initial/initial_fitness'
 #%%
 #FILES
 dataset_list = []
@@ -58,8 +76,8 @@ for i in range(201,212):
 
 for i in range(201,209):
     dataset_list.append('rc'+'%s' %(i))
-#%%
-
+    
+    
 #%%
 #FILE NAMES AND FOLDERS
 
@@ -613,41 +631,11 @@ for i in range(201,209):
 gbestResults_files_list = c1_list_gbestResults + r1_list_gbestResults + rc1_list_gbestResults + c2_list_gbestResults + r2_list_gbestResults + rc2_list_gbestResults
 
 
-
-
-
-
 #%%
 fitness_type = 'fitness'
 
 #num cores in parallel
 num_cores = multiprocessing.cpu_count()
-
-
-#%%
-#GLOBAL VARIABLES:
-#VARIABLES STIPULATED IN PAPER
-
-M = 20#population size 
-sg = 1000# stopping gap (number of iterations that gbest must not change)
-rg = 7 #refreshing gap
-c = 2#constant c
-phi = 0.3#phi
-w0 = 0.9 #omega #decreases linearly through training to 0.4
-w1 = 0.4
-
-
-
-alpha = 100
-beta = 0.001
-#see parameter calculations for omega and learning probability functions
-
-#Assummed variables:
-max_gen = sg#equal to sg .... so omega changes respective to the new cycle with a max_gen threshold
-
-
-
-
 
 #%%
 #INITIALISE FINAL RESULTS TABLE: TEMPORARY AS CAPTURES ALL EXPERIMENT RESULTS
@@ -656,6 +644,7 @@ df_distance = pd.DataFrame(np.zeros((len(dataset_list), num_experiments)))
 df_numVehicles = pd.DataFrame(np.zeros((len(dataset_list), num_experiments)))
 df_fitness = pd.DataFrame(np.zeros((len(dataset_list), num_experiments)))
 df_particle = pd.DataFrame(np.zeros((len(dataset_list),num_experiments)))
+
 
 #%%
 #SUMMARY OF RESULTS: FINAL RESULTS TO SAVE
@@ -693,12 +682,7 @@ arr_customer_cols = 15
 # 12: total_time_check = new_curr_time + distance[curr,0]
 # 13: completeTime
 # 14: startTime = readyTime - depot distance
-
 #%%
-
-
-#%%
-
 for  i in range(len(dataset_list)):
     #file names
     dataSet = dataset_list[i]
@@ -785,10 +769,10 @@ for  i in range(len(dataset_list)):
         #READ IN INITIAL DICTIONARIES
         #dictionary form of initial population
         #READ IN INITIAL DICTIONARIES
-        pop_particle_routeList_list =np.load(initialRouteList_file)
-        pop_particle_distance_list = np.load(initialDistList_file)
-        pop_particle_position_list =  np.array(list(np.load(initialPositionList_files)))
-        pop_particle_velocity_list =  np.array(list(np.load(initialVelocityList_files)))
+        pop_particle_routeList_list =np.load(initialRouteList_file, allow_pickle=True)
+        pop_particle_distance_list = np.load(initialDistList_file, allow_pickle=True)
+        pop_particle_position_list =  np.array(list(np.load(initialPositionList_files,allow_pickle=True)))
+        pop_particle_velocity_list =  np.array(list(np.load(initialVelocityList_files, allow_pickle=True)))
         df_results = pd.read_csv(results_file)
         arr_results = df_results.values# ['num_vehicles', 'distance', 'fitness']
         pop_distance_list = arr_results[:,1]
@@ -892,3 +876,4 @@ for  i in range(len(dataset_list)):
     #evaluate best solution from all the experiments
     print('dataset completed: ' ,dataSet)
     
+

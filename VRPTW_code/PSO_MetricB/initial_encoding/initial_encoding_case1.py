@@ -29,8 +29,8 @@ distanceMatrix_path = cwd + '/solomon25_csv/distance_matrix'
 
 #results
 
-initialPop_path = cwd + '/initial_rerun4/initial_pop'
-initialFitness_path = cwd + '/initial_rerun4/initial_fitness'
+initialPop_path = cwd + '/initial/initial_pop'
+initialFitness_path = cwd + '/initial/initial_fitness'
 #%%
 
 #read in file names

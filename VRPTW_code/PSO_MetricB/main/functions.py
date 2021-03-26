@@ -91,7 +91,7 @@ def tournament_selection(particle, M):#, pC):
 #%%
 
 
-def pbest_particle_pC_list(M,denom, M_1):
+def pbest_particle_pC_list(M, denom, M_1):
     pC_list = [learning_probability(i,M, denom, M_1) for i in range(1,M+1)]
 
 
