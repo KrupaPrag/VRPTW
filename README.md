@@ -17,11 +17,17 @@ https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=5773510
 #### Datasets: Solomon Benchmarking Dataset
 https://www.sintef.no/projectweb/top/vrptw/solomon-benchmark/
 
-#### Updated files:
-For each of the algorithms and the respective metrics, the code for the initial encoding and optimisation can be found in the following files:
-Initial Encoding: '/initial_encoding/main_initialEncoding.py'
-Optimisation: '/main/main.py'
+#### Executing Files:
+For each of the algorithms and the respective metrics ('../VRPTW_code/algorithm_Metric'), the code for the initial encoding and optimisation technique can be found in the following files:
+*For GA:* 
+Initial Encoding: '../initial_encoding/main_initialEncoding.py'
+Optimisation: '../main/main.py'
+*For PSO:* 
+Initial Encoding: '../initial_encoding/initialEncoding_case1.py'
+Optimisation: '../main/main.py'
 
 NOTE: Initial encoding needs to be run before running the main file in order to create the initial candidate solutions.
 
-Please note that the '/main/final' folder contains some experiments from solving the VRPTW for datasets with 25 customers. This folder would need to be replicated to run the datasets with 50 and 100 customers.  
+Please note that the 'initial_encoding/initial' folder contains the initial encodings, and the '/main/final' folder contains some experiments from solving the VRPTW for datasets with 25 customers. These folders would need to be replicated to run the datasets with 50 and 100 customers. And set the 'num_customers' in the respective files to the dataset that you are considering i.e. 25, 50 and 100 customers. 
+
+
